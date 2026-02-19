@@ -68,6 +68,8 @@ export default function RootLayout({ children }) {
           `}
         </Script>
 
+        <script src="https://analytics.ahrefs.com/analytics.js" data-key="vomtL+0V/90AWEuOfVZmXA" async></script>
+
         {children}
         <Footer />
       </body>
