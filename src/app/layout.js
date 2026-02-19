@@ -11,13 +11,13 @@ const inter = Inter({ subsets: ['latin'] });
 export const metadata = {
   metadataBase: new URL(SITE_CONFIG.baseUrl),
   title: {
-    default: `${SITE_CONFIG.name} - Baca & Download Doujinshi Bahasa Indonesia`,
+    default: `${SITE_CONFIG.name} - Baca Komik, Manga, Manhwa & Manhua Bahasa Indonesia`,
     template: `%s | ${SITE_CONFIG.name}`,
   },
   description: SITE_CONFIG.description,
   keywords: SITE_CONFIG.keywords,
   openGraph: {
-    title: `${SITE_CONFIG.name} - Baca & Download Doujinshi Bahasa Indonesia`,
+    title: `${SITE_CONFIG.name} - Baca Komik, Manga, Manhwa & Manhua Bahasa Indonesia`,
     description: SITE_CONFIG.description,
     url: SITE_CONFIG.baseUrl,
     siteName: SITE_CONFIG.name,
