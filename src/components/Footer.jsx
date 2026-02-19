@@ -30,7 +30,7 @@ export default function Footer() {
                 <h3 className="text-white font-bold mb-2 border-l-4 border-primary pl-3">TAUTAN</h3>
                 <Link href="/list?type=Manga" className="text-gray-400 hover:text-primary transition text-sm">Manga</Link>
                 <Link href="/list?type=Manhwa" className="text-gray-400 hover:text-primary transition text-sm">Manhwa</Link>
-                <Link href="/list?type=Doujinshi" className="text-gray-400 hover:text-primary transition text-sm">Doujinshi</Link>
+                <Link href="/list?type=Manhua" className="text-gray-400 hover:text-primary transition text-sm">Manhua</Link>
             </div>
 
             {/* Kolom 3: Social & Support */}
