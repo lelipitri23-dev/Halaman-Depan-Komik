@@ -1,0 +1,22 @@
+// config.js
+export const SITE_CONFIG = {
+  // PERBAIKAN DI SINI: Gunakan NEXT_PUBLIC_SITE_NAME
+  name: process.env.NEXT_PUBLIC_SITE_NAME || 'Doujindesu',
+  
+  baseUrl: process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000',
+  apiBaseUrl: process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:5000',
+  
+  // SEO & Metadata
+  // Catatan: Jika ini hanya dipakai di Metadata (Server Component), tidak wajib pakai NEXT_PUBLIC_.
+  // Tapi jika error berlanjut, ubah juga menjadi NEXT_PUBLIC_SITE_DESCRIPTION di .env dan disini.
+  description: process.env.SITE_DESCRIPTION || 'KomikCast - Platform baca komik online terlengkap di Indonesia. Baca ribuan komik manga, manhwa, dan manhua gratis dengan kualitas terbaik.',
+  keywords: (process.env.SITE_KEYWORDS || 'komikcast, komik online, komikcast to, komiku, manga, manhwa').split(', '),
+  
+  socials: {
+    facebook: process.env.NEXT_PUBLIC_SOCIAL_FACEBOOK || '#',
+    twitter: process.env.NEXT_PUBLIC_SOCIAL_TWITTER || '#',
+    instagram: process.env.NEXT_PUBLIC_SOCIAL_INSTAGRAM || '#',
+    github: process.env.NEXT_PUBLIC_SOCIAL_GITHUB || '#',
+    discord: process.env.NEXT_PUBLIC_SOCIAL_DISCORD || '#',
+  }
+};
