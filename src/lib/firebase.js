@@ -4,13 +4,13 @@ import { getAuth } from "firebase/auth";
 import { getAnalytics, isSupported } from "firebase/analytics";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAjcrntHoKmkdAsZr3ffcLqS1NL2lRN8Y8",
-  authDomain: "doujindesuapk.firebaseapp.com",
-  projectId: "doujindesuapk",
-  storageBucket: "doujindesuapk.firebasestorage.app",
-  messagingSenderId: "31970708581",
-  appId: "1:31970708581:web:eb7d33787587ec3b8b4a8c",
-  measurementId: "G-CPSKY8VFN8"
+  apiKey: "",
+  authDomain: "",
+  projectId: "",
+  storageBucket: "",
+  messagingSenderId: "",
+  appId: "",
+  measurementId: ""
 };
 
 // Mencegah inisialisasi ganda saat hot-reload Next.js
