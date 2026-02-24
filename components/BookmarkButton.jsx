@@ -6,11 +6,11 @@ import { toggleBookmark, isBookmarked } from '@/lib/bookmarks';
 import { trackBookmarkAdd, trackBookmarkRemove } from '@/lib/analytics';
 
 export default function BookmarkButton({ manga }) {
-  const { user }  = useAuth();
-  const router    = useRouter();
-  const [saved,   setSaved]   = useState(false);
+  const { user } = useAuth();
+  const router = useRouter();
+  const [saved, setSaved] = useState(false);
   const [loading, setLoading] = useState(false); // mulai false, jangan block render
-  const [pulse,   setPulse]   = useState(false);
+  const [pulse, setPulse] = useState(false);
   const [checked, setChecked] = useState(false); // sudah cek status bookmark?
 
   // Cek status bookmark setelah user tersedia
@@ -37,14 +37,14 @@ export default function BookmarkButton({ manga }) {
     setLoading(true);
     try {
       const nowSaved = await toggleBookmark(user.uid, {
-        slug:              manga.slug,
-        title:             manga.title,
-        coverImage:        manga.coverImage  || '',
-        type:              manga.type        || '',
-        status:            manga.status      || '',
-        rating:            manga.rating      || 0,
-        last_chapter:      manga.chapters?.[0]?.title || '',
-        last_chapter_slug: manga.chapters?.[0]?.slug  || '',
+        slug: manga.slug,
+        title: manga.title,
+        coverImage: manga.coverImage || '',
+        type: manga.type || '',
+        status: manga.status || '',
+        rating: manga.rating || 0,
+        last_chapter: manga.chapters?.[0]?.title || '',
+        last_chapter_slug: manga.chapters?.[0]?.slug || '',
       });
       setSaved(nowSaved);
       if (nowSaved) {
@@ -76,16 +76,15 @@ export default function BookmarkButton({ manga }) {
       onClick={handleToggle}
       disabled={loading}
       aria-label={saved ? 'Hapus bookmark' : 'Tambah bookmark'}
-      className={`flex items-center gap-2 px-4 py-3 rounded-xl border font-bold text-sm transition-all duration-300 disabled:opacity-50 select-none ${
-        saved
+      className={`flex items-center gap-2 px-4 py-3 rounded-xl border font-bold text-sm transition-all duration-300 disabled:opacity-50 select-none ${saved
           ? 'bg-accent-red/15 border-accent-red text-accent-red'
           : 'bg-bg-elevated border-border text-text-secondary hover:border-accent-red hover:text-accent-red'
-      } ${pulse ? 'scale-110' : 'scale-100'}`}
+        } ${pulse ? 'scale-110' : 'scale-100'}`}
     >
       {loading ? (
         <svg className="animate-spin w-4 h-4" viewBox="0 0 24 24" fill="none">
-          <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" className="opacity-25"/>
-          <path d="M4 12a8 8 0 018-8" stroke="currentColor" strokeWidth="4" className="opacity-75"/>
+          <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" className="opacity-25" />
+          <path d="M4 12a8 8 0 018-8" stroke="currentColor" strokeWidth="4" className="opacity-75" />
         </svg>
       ) : (
         <svg

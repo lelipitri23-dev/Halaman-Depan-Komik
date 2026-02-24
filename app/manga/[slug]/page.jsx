@@ -43,8 +43,8 @@ export default async function MangaDetailPage({ params }) {
   if (!res?.data?.info) notFound();
 
   const { info: manga, recommendations = [] } = res.data;
-  const chapters     = manga.chapters || [];
-  const firstChapter  = chapters[chapters.length - 1];
+  const chapters = manga.chapters || [];
+  const firstChapter = chapters[chapters.length - 1];
   const latestChapter = chapters[0];
 
   const jsonLd = {
@@ -69,10 +69,9 @@ export default async function MangaDetailPage({ params }) {
       <main className="pt-14 pb-safe max-w-2xl mx-auto">
 
         {/* ── HERO: blurred bg + cover + info ─────────────── */}
-        {/* Gunakan overflow-hidden + pb agar tinggi hero terdefinisi */}
         <div className="relative overflow-hidden" style={{ minHeight: '220px' }}>
 
-          {/* Blurred background — absolute, hanya dekorasi */}
+          {/* Blurred background */}
           {manga.coverImage && (
             <div className="absolute inset-0 z-0">
               <Image
@@ -81,13 +80,13 @@ export default async function MangaDetailPage({ params }) {
                 fill
                 className="object-cover blur-2xl scale-110 opacity-20"
                 unoptimized
-                priority // <-- Ditambahkan di sini untuk memperbaiki LCP warning
+                priority
               />
               <div className="absolute inset-0 bg-gradient-to-b from-bg-primary/30 via-bg-primary/60 to-bg-primary" />
             </div>
           )}
 
-          {/* Content — z-10 agar di atas blur */}
+          {/* Content */}
           <div className="relative z-10 px-4 pt-5 pb-5 flex gap-4">
             {/* Cover */}
             <div className="flex-none w-24 rounded-xl overflow-hidden border-2 border-accent-red shadow-xl shadow-blue-500/20 self-start">
@@ -100,7 +99,7 @@ export default async function MangaDetailPage({ params }) {
                   className="object-cover w-full"
                   style={{ aspectRatio: '2/3' }}
                   unoptimized
-                  priority // <-- Ditambahkan di sini juga untuk memperbaiki LCP warning
+                  priority
                 />
               ) : (
                 <div className="w-full bg-bg-elevated" style={{ aspectRatio: '2/3' }} />
@@ -108,7 +107,7 @@ export default async function MangaDetailPage({ params }) {
             </div>
 
             {/* Info */}
-            <div className="flex-1 min-w-0">
+            <div className="flex-1 min-w-0 flex flex-col justify-center">
               <h1 className="font-display text-xl text-text-primary leading-tight tracking-wide mb-2">
                 {manga.title}
               </h1>
@@ -116,27 +115,25 @@ export default async function MangaDetailPage({ params }) {
               {/* Badges */}
               <div className="flex flex-wrap gap-1.5 mb-3">
                 {manga.type && (
-                  <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full uppercase border ${
-                    manga.type?.toLowerCase() === 'manhwa'  ? 'bg-blue-900/50 border-blue-700 text-blue-300'
+                  <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full uppercase border ${manga.type?.toLowerCase() === 'manhwa' ? 'bg-blue-900/50 border-blue-700 text-blue-300'
                     : manga.type?.toLowerCase() === 'manhua' ? 'bg-orange-900/50 border-orange-700 text-orange-300'
-                    : 'bg-blue-900/50 border-blue-700 text-blue-300'
-                  }`}>
+                      : 'bg-blue-900/50 border-blue-700 text-blue-300'
+                    }`}>
                     {manga.type}
                   </span>
                 )}
                 {manga.status && (
-                  <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full uppercase border ${
-                    manga.status?.toLowerCase() === 'ongoing'
-                      ? 'bg-green-900/50 border-green-700 text-green-300'
-                      : 'bg-gray-800 border-gray-600 text-gray-400'
-                  }`}>
+                  <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full uppercase border ${manga.status?.toLowerCase() === 'ongoing'
+                    ? 'bg-green-900/50 border-green-700 text-green-300'
+                    : 'bg-gray-800 border-gray-600 text-gray-400'
+                    }`}>
                     {manga.status}
                   </span>
                 )}
               </div>
 
               {/* Stats */}
-              <div className="flex items-center gap-4 flex-wrap">
+              <div className="flex items-center gap-4 flex-wrap mb-2">
                 {manga.rating > 0 && (
                   <div className="flex items-center gap-1">
                     <svg viewBox="0 0 24 24" fill="#ffd700" className="w-4 h-4">
@@ -158,12 +155,19 @@ export default async function MangaDetailPage({ params }) {
                   <span className="text-text-muted text-xs">{chapters.length} Ch</span>
                 </div>
               </div>
+
+              {/* Author (Placed below stats for better layout) */}
+              {manga.author && (
+                <p className="text-text-muted text-xs mt-1">
+                  Pengarang: <span className="text-text-secondary font-semibold">{manga.author}</span>
+                </p>
+              )}
             </div>
           </div>
         </div>
         {/* ── END HERO ─────────────────────────────────────── */}
 
-        {/* ── READ BUTTONS — di luar hero, flow normal ────── */}
+        {/* ── READ BUTTONS ─────────────────────────────────── */}
         {chapters.length > 0 && (
           <div className="px-4 mt-3 flex gap-3">
             {firstChapter && (
@@ -196,21 +200,12 @@ export default async function MangaDetailPage({ params }) {
           <BookmarkButton manga={manga} />
         </div>
 
-        {/* ── AUTHOR ──────────────────────────────────────── */}
-        {manga.author && (
-          <div className="px-4 mt-3">
-            <p className="text-text-muted text-xs">
-              Pengarang: <span className="text-text-secondary font-semibold">{manga.author}</span>
-            </p>
-          </div>
-        )}
-
         {/* ── GENRES ──────────────────────────────────────── */}
         {manga.genres?.length > 0 && (
           <div className="px-4 mt-4">
             <div className="flex flex-wrap gap-2">
               {manga.genres.map((g) => (
-                <Link key={g} href={`/manga?genre=${encodeURIComponent(g)}`} className="genre-badge">
+                <Link key={g} href={`/manga?genre=${encodeURIComponent(g)}`} className="genre-badge text-[10px] font-bold px-3 py-1 bg-bg-elevated text-text-secondary rounded-lg border border-border hover:text-accent-red hover:border-accent-red transition-colors">
                   {g}
                 </Link>
               ))}
@@ -258,6 +253,7 @@ export default async function MangaDetailPage({ params }) {
         )}
 
         {/* ── RECOMMENDATIONS ─────────────────────────────── */}
+
         {recommendations.length > 0 && (
           <div className="px-4 mt-6">
             <h2 className="font-display text-base tracking-widest text-text-secondary mb-3">REKOMENDASI</h2>
@@ -268,7 +264,6 @@ export default async function MangaDetailPage({ params }) {
             </div>
           </div>
         )}
-
         <div className="h-6" />
       </main>
     </div>

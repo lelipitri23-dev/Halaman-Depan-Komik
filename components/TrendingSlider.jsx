@@ -74,9 +74,8 @@ export default function TrendingSlider({ trending = [] }) {
                 </span>
               )}
               {item?.status && (
-                <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full uppercase ${
-                  item.status?.toLowerCase() === 'ongoing' ? 'bg-green-900/60 text-green-400 border border-green-800' : 'bg-gray-800 text-gray-400 border border-gray-700'
-                }`}>
+                <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full uppercase ${item.status?.toLowerCase() === 'ongoing' ? 'bg-green-900/60 text-green-400 border border-green-800' : 'bg-gray-800 text-gray-400 border border-gray-700'
+                  }`}>
                   {item.status}
                 </span>
               )}
@@ -99,9 +98,8 @@ export default function TrendingSlider({ trending = [] }) {
           <button
             key={i}
             onClick={() => setCurrent(i)}
-            className={`rounded-full transition-all duration-300 ${
-              i === current ? 'bg-accent-red w-4 h-1.5' : 'bg-border w-1.5 h-1.5'
-            }`}
+            className={`rounded-full transition-all duration-300 ${i === current ? 'bg-accent-red w-4 h-1.5' : 'bg-border w-1.5 h-1.5'
+              }`}
           />
         ))}
       </div>

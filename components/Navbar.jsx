@@ -14,6 +14,7 @@ function HomeIcon({ active }) {
     </svg>
   );
 }
+
 function SearchIcon({ active }) {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-6 h-6">
@@ -21,6 +22,7 @@ function SearchIcon({ active }) {
     </svg>
   );
 }
+
 function GridIcon({ active }) {
   return (
     <svg viewBox="0 0 24 24" fill={active ? 'currentColor' : 'none'} stroke="currentColor" strokeWidth="2" className="w-6 h-6">
@@ -31,11 +33,24 @@ function GridIcon({ active }) {
     </svg>
   );
 }
+
 function BookmarkIcon({ active }) {
   return (
     <svg viewBox="0 0 24 24" fill={active ? 'currentColor' : 'none'} stroke="currentColor" strokeWidth="2" className="w-6 h-6">
       <path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z" />
     </svg>
+  );
+}
+
+// [FIX] Wrapper untuk TagsIcon agar prop 'active' tidak bocor ke DOM
+function GenreIcon({ active }) {
+  return (
+    <TagsIcon
+      className="w-6 h-6"
+      fill={active ? 'currentColor' : 'none'}
+      stroke="currentColor"
+      strokeWidth={2}
+    />
   );
 }
 
@@ -128,7 +143,8 @@ export default function Navbar() {
   const NAV_ITEMS = [
     { href: '/', icon: HomeIcon, label: 'Home' },
     { href: '/manga', icon: GridIcon, label: 'All' },
-    { href: '/genres', icon: TagsIcon, label: 'Genre' },
+    // [FIX] Menggunakan GenreIcon wrapper, bukan TagsIcon langsung
+    { href: '/genres', icon: GenreIcon, label: 'Genre' },
     { href: '/bookmarks', icon: BookmarkIcon, label: 'Simpan' },
   ];
 

@@ -1,6 +1,7 @@
 import './globals.css';
 import { AuthProvider } from '@/context/AuthContext';
 import { Suspense } from 'react';
+import Script from 'next/script';
 import AnalyticsProvider from '@/components/AnalyticsProvider';
 
 const SITE_NAME = 'Komikcast';
@@ -10,7 +11,7 @@ const SITE_DESC = 'Baca komik manga, manhwa, dan manhua terlengkap secara gratis
 export const metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: `${SITE_NAME} - Baca Manga, Manhwa & Manhua Gratis`,
+    default: `${SITE_NAME} - Baca Komik, Manga, Manhwa & Manhua Bahasa Indonesia`,
     template: `%s | ${SITE_NAME}`,
   },
   description: SITE_DESC,
@@ -23,13 +24,13 @@ export const metadata = {
     locale: 'id_ID',
     url: SITE_URL,
     siteName: SITE_NAME,
-    title: `${SITE_NAME} - Baca Manga, Manhwa & Manhua Gratis`,
+    title: `${SITE_NAME} - Baca Komik, Manga, Manhwa & Manhua Bahasa Indonesia`,
     description: SITE_DESC,
     images: [{ url: '/og-image.png', width: 1200, height: 630, alt: SITE_NAME }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: `${SITE_NAME} - Baca Manga, Manhwa & Manhua Gratis`,
+    title: `${SITE_NAME} - Baca Komik, Manga, Manhwa & Manhua Bahasa Indonesia`,
     description: SITE_DESC,
     images: ['/og-image.png'],
   },
@@ -83,6 +84,21 @@ export default function RootLayout({ children }) {
           }}
         />
       </head>
+      <Script
+        id="histats"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{
+          __html: `var _Hasync= _Hasync|| [];
+        _Hasync.push(['Histats.start', '1,5010901,4,0,0,0,00010000']);
+        _Hasync.push(['Histats.fasi', '1']);
+        _Hasync.push(['Histats.track_hits', '']);
+        (function() {
+        var hs = document.createElement('script'); hs.type = 'text/javascript'; hs.async = true;
+        hs.src = ('//s10.histats.com/js15_as.js');
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(hs);
+        })();`,
+        }}
+      />
       <body className="bg-bg-primary text-text-primary font-body antialiased">
         <AuthProvider>
           {/* Suspense wajib karena AnalyticsProvider pakai useSearchParams */}
